@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Sudoku Solver</title>
+        <link rel="icon" type="image/x-icon" href="{{url_for('static',filename='img/favicon.jpg')}}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='dashboard.css')}}">
+    </head>
+    <body id="page-top">
+         {% with messages= get_flashed_messages(with_categories=true)%}
+            {% if messages %}
+                    {% for category,msg in messages %}
+                        <div class="alert1 alert-{{category}}1"> {{ msg|capitalize }}</div>
+                    {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+
+                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="{{url_for('static',filename='img/banner.jpg')}}" alt="" /></a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ml-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                    <ul class="navbar-nav text-uppercase ml-auto">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Services Provided</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">The Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">The team</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="https://easysudokusolver.herokuapp.com/" target="_blank">Other similar site</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="logout">LogOut</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">Machine Learning based SUDOKU SOLVER!</div>
+                <div class="masthead-heading text-uppercase">It's Nice To See You here</div>
+                <a class="btn btn-success text-uppercase js-scroll-trigger" id="butt" href="webcam">Scan Here</a></br></br>
+                <a class="btn btn-success text-uppercase js-scroll-trigger" id="butt" href="random_board">Random Board</a></br></br>
+                <a class="btn btn-success text-uppercase js-scroll-trigger" id="butt" href="visualise">Visualise</a>
+                <div class="portfolio-caption-heading">This is the future !</div>
+            </div>
+        </header>
+        <!-- Services-->
+        <section class="page-section" id="services">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Services Provided</h2>
+                </div>
+                <div class="row text-center">
+
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-paint-roller fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Responsive Design</h4>
+
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Web Security</h4>
+
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-clock fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Up to Date</h4>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Portfolio Grid-->
+        <section class="page-section bg-light" id="portfolio">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">My Portfolio</h2>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-4 mb-4">
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="{{url_for('static',filename='img/portfolio/7.jpg')}}" alt="" />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Initiation</div>
+                                <div class="portfolio-caption-subheading text-muted">starting project</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 mb-4">
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="{{url_for('static',filename='img/portfolio/8.jpg')}}" alt="" />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Explore</div>
+                                <div class="portfolio-caption-subheading text-muted">exploring project</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 mb-4">
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="{{url_for('static',filename='img/portfolio/9.jpg')}}"alt="" />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Planning</div>
+                                <div class="portfolio-caption-subheading text-muted">creating team</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-sm-2 mb-4 mb-lg-0"></div>
+                    <div class="col-lg-4 col-sm-4 mb-4 mb-lg-0">
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal4">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="{{url_for('static',filename='img/portfolio/10.jpg')}}" alt="" />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Execution</div>
+                                <div class="portfolio-caption-subheading text-muted">creating model</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 mb-4 mb-sm-0">
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal5">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="{{url_for('static',filename='img/portfolio/11.jpg')}}" alt="" />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Monitor & Control</div>
+                                <div class="portfolio-caption-subheading text-muted">monitoring and controlling</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-2 mb-4 mb-lg-0"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-4 mb-4 mb-lg-0"></div>
+                    <div class="col-lg-4 col-sm-4">
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal6">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="{{url_for('static',filename='img/portfolio/12.jpg')}}" alt="" />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Project Finish</div>
+                                <div class="portfolio-caption-subheading text-muted">project developed</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 mb-4 mb-lg-0"></div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">About</h2>
+                    <h3 class="section-subheading text-muted">The game first appeared in Japan in 1984 where it was given the name “Sudoku” which is short for a longer expression in Japanese – “Sūji wa dokushin ni kagiru” – which means, “the digits are limited to one occurrence.”.</h3>
+                    <h3 class="section-subheading text-muted">This is based on the logical placement of numbers. A game of logic, Sudoku doesn’t require any calculation nor special math skills; all that is needed are brains and concentration.</h3>
+                </div>
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{{url_for('static',filename='img/about/1.jpg')}}"alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>June 2021</h4>
+                                <h4 class="subheading">My Beginning</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">It was the starting phase of this project. At this time i was exploring digit recognition modules, and exploring the type of projects on which i can work.</p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{{url_for('static',filename='img/about/5.jpg')}}" alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>July 2021</h4>
+                                <h4 class="subheading">A Goal is set</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">At this time period the project was decided and complete plan to execute the task was established.</p></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{{url_for('static',filename='img/about/6.jpg')}}" alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>October 2021</h4>
+                                <h4 class="subheading">At the verge of completion</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">During this period i went through the path designed and the work went on with full pace with the help of internet</p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{{url_for('static',filename='img/about/4.jfif')}}" alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>November 2021</h4>
+                                <h4 class="subheading">Final Stage</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">During this time the webpages of our final project got completed and was ready for deployment.</p></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{{url_for('static',filename='img/about/3.jpg')}}" alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>December 2021</h4>
+                                <h4 class="subheading">The Bride is ready</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">During this time, I deployed this into the internet</p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4><a href="https://github.com/likhit1761" target="_blank" style="color:white;">
+                                Be a Part
+                                <br />
+                                Of my
+                                <br />
+                                Story!</a>
+                            </h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="page-section bg-light" id="team" >
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">I and my Team of me alone</h2>
+                    <h3 class="section-subheading text-muted">Feel free to send me a email regarding changes or advices. I will be happy to learn from you !</h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="{{url_for('static',filename='img/team/1.jpg')}}" alt="" />
+                            <h4>Munukoti Likhit</h4>
+                            <p class="text-muted">Learner and enthusiast</p>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/likhit1761" target="_blank"><i class="fab fa-github"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/leela.krishna.165033" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/munukoti-likhit-0384691b1/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Reach me out from the mentioned links</p></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Hope you know a little more about Sudoku, play and enjoy this free online tool.</p></div>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Initiation</h2>
+                                    <p class="item-intro text-muted">A strong Mindset gives an ignition to not just be a survivor but also to transcend simply being a survivor, use an internal alchemy to turn something rotten and horrible into gold.</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{url_for('static',filename='img/portfolio/1.jpg')}}" alt="" />
+                                    <p>I decided to do this project as I was attracted by imageProcessing and when I was exploring, I went through many computer vision projects and my aim was to pick a project that can make us to learn a lot.</p>
+                                    <ul class="list-inline">
+                                        <li>Date: June 2021</li>
+                                    </ul>
+                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <i class="fas fa-times mr-1"></i>
+                                        Close Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Explore</h2>
+                                    <p class="item-intro text-muted">Explore the Unknown</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{url_for('static',filename='img/portfolio/2.jpg')}}" alt="" />
+                                    <p>Never stop your anxiety and explore. The more you explore is the more you grab. The world is in yours fingertips.</p>
+                                    <p>I started designing project plan, so that I can focus on that untill the end and came up with real time sudoku solver where one can scan sudoku, and get its solution in a very less time than actually solving it manually. I made it user-friendly by adding much more functionalities like hint, reset and clear specific cell. As an extension to the project a random sudoku board is added, where user can simply solve the various sudoku and visualized how actually the backtracking works to take out solution of sudoku</p>
+                                    <ul class="list-inline">
+                                        <li>Date: July 2021</li>
+                                    </ul>
+                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <i class="fas fa-times mr-1"></i>
+                                        Close Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Planning</h2>
+                                    <p class="item-intro text-muted">A journey without a plan is just a dream.</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{url_for('static',filename='img/portfolio/3.jpg')}}" alt="" />
+                                    <p>Those who plan do better than those who don't, even though they rarely stick to their plan.</p>
+                                    <p>It was necessary to stick my plan and showcase the skills. Every week, the task gets changed and works gets progressed.</p>
+                                    <ul class="list-inline">
+                                        <li>Date: August 2021</li>
+                                    </ul>
+                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <i class="fas fa-times mr-1"></i>
+                                        Close Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Execution</h2>
+                                    <p class="item-intro text-muted">Execution is the Key.</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{url_for('static',filename='img/portfolio/4.jpg')}}" alt="" />
+                                    <p>Ideas don’t make you rich. The correct Implementation of ideas does</p>
+                                    <p>Execution was excellent as per my perspective, the project started by login registration which inspired other to work harder and finally able to take the project to much higher level than expected</p>
+                                    <ul class="list-inline">
+                                        <li>Date: October 2021</li>
+                                    </ul>
+                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <i class="fas fa-times mr-1"></i>
+                                        Close Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Monitor and Control</h2>
+                                    <p class="item-intro text-muted">Obstacles are those things which frightens you, And they scares you when you take your eyes off your goal</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{url_for('static',filename='img/portfolio/5.jpg')}}" alt="" />
+                                    <p>Beleive in yourself, it is the strength… when there is smartwork and flexibility, many things can be achieved. The project plan went through some appropriate change control processes to make all things fall at one place.</p>
+                                    <ul class="list-inline">
+                                        <li>Date: November 2021</li>
+                                    </ul>
+                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <i class="fas fa-times mr-1"></i>
+                                        Close Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Project Finish</h2>
+                                    <p class="item-intro text-muted">The final moments gives you a lot of high</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{url_for('static',filename='img/portfolio/6.jpg')}}" alt="" />
+                                    <p>At end I found my coordination with myself and confidence within. Now further plan is to make it as much available as possible. I had a plan for maintaining a leaderboard as well. But, learned a lot from the project and there was no regret in picking this difficult project. Also, the Flask was new to me at the intial stage, and other things were obviously new to us. At last, it was a great learning</p>
+                                    <ul class="list-inline">
+                                        <li>Date: December 2021</li>
+                                    </ul>
+                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <i class="fas fa-times mr-1"></i>
+                                        Close Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{url_for('static',filename='dashboard.js')}}"></script>
+    </body>
+</html>
